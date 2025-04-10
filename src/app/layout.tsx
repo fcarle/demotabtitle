@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -19,10 +20,10 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
-        <script src="https://tabtitle.io/api/script"></script>
-        <script>
+        <Script src="https://tabtitle.io/api/script" />
+        <Script id="tabtitle-init">
           {`new TabTitle('9b1b9c19-4d02-4071-8bb8-e2d4bfa310b4');`}
-        </script>
+        </Script>
       </body>
     </html>
   );
