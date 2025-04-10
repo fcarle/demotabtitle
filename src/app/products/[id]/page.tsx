@@ -2,30 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProductById } from "@/data/products";
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
 
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+export const metadata = {
+  title: "Product Details - ShopStore",
+  description: "View detailed product information",
 };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const product = getProductById(params.id);
-  
-  if (!product) {
-    return {
-      title: "Product Not Found - ShopStore",
-      description: "The requested product could not be found",
-    };
-  }
-  
-  return {
-    title: `${product.name} - ShopStore`,
-    description: product.description,
+type ProductPageProps = {
+  params: {
+    id: string;
   };
-}
+};
 
-export default function ProductPage({ params }: Props) {
+export default function ProductPage(props: ProductPageProps) {
+  const { params } = props;
   const product = getProductById(params.id);
   
   if (!product) {
