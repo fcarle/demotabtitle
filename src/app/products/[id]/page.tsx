@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProductById } from "@/data/products";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-export function generateMetadata({ params }: ProductPageProps) {
+export function generateMetadata({ params }: Props): Metadata {
   const product = getProductById(params.id);
   
   if (!product) {
@@ -25,7 +25,7 @@ export function generateMetadata({ params }: ProductPageProps) {
   };
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
+export default function ProductPage({ params }: Props) {
   const product = getProductById(params.id);
   
   if (!product) {
